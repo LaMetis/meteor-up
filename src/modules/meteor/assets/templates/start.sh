@@ -20,9 +20,9 @@ set -e
 docker run \
   -d \
   --restart=always \
-  --publish=$PORT:80 \
+  --publish=<% if(ip) { %><%= ip %>:<% } %>$PORT:80 \
   --volume=$BUNDLE_PATH:/bundle \
-  --hostname="$HOSTNAME-$APPNAME" \
+  --hostname="$HOSTNAME-<%= hostNameSuffix %>" \
   --env-file=$ENV_FILE \
   <% if(useLocalMongo)  { %>--link=mongodb:mongodb --env=MONGO_URL=mongodb://mongodb:27017/$APPNAME <% } %>\
   <% if(logConfig && logConfig.driver)  { %>--log-driver=<%= logConfig.driver %> <% } %>\

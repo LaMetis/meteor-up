@@ -122,7 +122,9 @@ export function push(api) {
         dest: '/opt/' + config.name + '/config/start.sh',
         vars: {
           appName: config.name,
+          hostNameSuffix: config.name.replace(/_/g,'-'),
           useLocalMongo: api.getConfig().mongo ? 1 : 0,
+          ip: config.env.IP || null,
           port: config.env.PORT || 80,
           sslConfig: config.ssl,
           logConfig: config.log,
@@ -152,6 +154,7 @@ export function envconfig(api) {
   // It'll run on PORT 80 and we can't override it
   // Changing the port is done via the start.sh script
   delete env.PORT;
+  delete env.IP;
 
   list.copy('Sending Environment Variables', {
     src: path.resolve(__dirname, 'assets/templates/env.list'),
