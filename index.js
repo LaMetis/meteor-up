@@ -1,2 +1,2 @@
-#!/usr/bin/env node5
+#!/usr/bin/env node
 require('./lib');
