@@ -20,7 +20,8 @@ set -e
 docker run \
   -d \
   --restart=always \
-  --publish=<% if(ip) { %><%= ip %>:<% } %>$PORT:80 \
+  --expose 80 \
+  <% if(publish)  { %>--publish=<% if(ip) { %><%= ip %>:<% } %>$PORT:80 <% } %>\
   --volume=$BUNDLE_PATH:/bundle \
   --hostname="$HOSTNAME-<%= hostNameSuffix %>" \
   --env-file=$ENV_FILE \

@@ -126,6 +126,7 @@ export function push(api) {
           useLocalMongo: api.getConfig().mongo ? 1 : 0,
           ip: config.env.IP || null,
           port: config.env.PORT || 80,
+          publish: config.env.PORT !== null,
           sslConfig: config.ssl,
           logConfig: config.log,
           volumes: config.volumes,
